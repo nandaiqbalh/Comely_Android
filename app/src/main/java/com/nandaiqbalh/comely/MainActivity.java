@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         // menambahkan fragment ke dalam frame layout lewat fragment manager
         fragmentManager.beginTransaction().add(R.id.container, homeFragment).show(homeFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.container, keranjangFragment).show(keranjangFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.container, akunFragment).show(akunFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.container, keranjangFragment).hide(keranjangFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.container, akunFragment).hide(akunFragment).commit();
 
     }
 }
