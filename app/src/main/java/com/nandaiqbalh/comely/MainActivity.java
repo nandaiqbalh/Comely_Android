@@ -16,13 +16,6 @@ import com.nandaiqbalh.comely.fragment.KeranjangFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    // FRAGMENT
-    HomeFragment homeFragment = new HomeFragment();
-    KeranjangFragment keranjangFragment = new KeranjangFragment();
-    AkunFragment akunFragment = new AkunFragment();
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    Fragment active = homeFragment;
-
     BottomNavigationView bottomNavigationView;
 
     @Override
