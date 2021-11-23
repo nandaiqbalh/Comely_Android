@@ -1,5 +1,6 @@
 package com.nandaiqbalh.comely.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.nandaiqbalh.comely.R;
+import com.smarteist.autoimageslider.DefaultSliderView;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +63,45 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    // member variabel
+    SliderLayout sliderLayout;
+
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        sliderLayout = view.findViewById(R.id.slider);
+        sliderLayout.setIndicatorAnimation(IndicatorAnimations.);
+        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
+        sliderLayout.setScrollTimeInSec(2);
+
+        setSliderViews();
+
+        return view;
+
+    }
+
+    private void setSliderViews() {
+
+        for (int i = 0; i < 3; i++){
+            DefaultSliderView sliderView  = new DefaultSliderView(getContext());
+
+            switch (i){
+                case 0 :
+                    sliderView.setImageDrawable(R.drawable.slider1);
+                    break;
+                case 1 :
+                    sliderView.setImageDrawable(R.drawable.slider2);
+                    break;
+                case 2 :
+                    sliderView.setImageDrawable(R.drawable.slider3);
+                    break;
+            }
+            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+            sliderLayout.addSliderView(sliderView);
+        }
     }
 }

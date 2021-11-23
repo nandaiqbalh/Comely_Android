@@ -51,6 +51,8 @@
 
     </LinearLayout>
 
-
-
+    <com.smarteist.autoimageslider.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 </LinearLayout>
