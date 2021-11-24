@@ -47,12 +47,167 @@
             android:background="@color/neutral_color"
             />
 
-
-
     </LinearLayout>
 
     <com.smarteist.autoimageslider.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
+    
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="25dp"
+                android:text="Category"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/neutral_dark"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="115dp"
+                android:layout_height="25dp"
+                android:text="More Category"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="14sp"
+                android:layout_marginStart="150dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/cat_man_shirt"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cat_man_shirt"
+                    android:background="@color/neutral_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Man Shirt"
+                    android:textColor="@color/neutral_grey"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/cat_woman_bag"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cat_woman_bag"
+                    android:background="@color/neutral_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Woman Bag"
+                    android:textColor="@color/neutral_grey"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/cat_work_equipment"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cat_work_equipment"
+                    android:background="@color/neutral_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Man Bag"
+                    android:textColor="@color/neutral_grey"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/cat_man_shoes"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cat_man_shoes"
+                    android:background="@color/neutral_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Man Shoes"
+                    android:textColor="@color/neutral_grey"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/cat_dress"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cat_dress"
+                    android:background="@color/neutral_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Woman Dress"
+                    android:textColor="@color/neutral_grey"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    
 </LinearLayout>
