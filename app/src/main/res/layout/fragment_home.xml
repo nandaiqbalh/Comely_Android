@@ -53,13 +53,13 @@
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
-    
+
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -208,6 +208,42 @@
         </LinearLayout>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="Featured Product"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/neutral_dark"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="See More"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="14sp"
+                android:layout_marginStart="140dp"
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/rv_produk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     
 </LinearLayout>
