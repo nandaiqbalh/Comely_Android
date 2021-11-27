@@ -93,6 +93,7 @@
 
             <LinearLayout
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:orientation="vertical">
@@ -116,6 +117,7 @@
 
             <LinearLayout
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:orientation="vertical">
@@ -139,6 +141,7 @@
 
             <LinearLayout
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:orientation="vertical">
@@ -162,6 +165,7 @@
 
             <LinearLayout
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:orientation="vertical">
@@ -183,28 +187,6 @@
                     />
             </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
-                android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/cat_dress"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/cat_dress"
-                    android:background="@color/neutral_color"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Woman Dress"
-                    android:textColor="@color/neutral_grey"
-                    android:textSize="10dp"
-                    android:gravity="center"
-                    />
-            </LinearLayout>
         </LinearLayout>
 
 
@@ -220,7 +202,7 @@
             android:layout_height="25dp"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="128dp"
                 android:layout_height="25dp"
                 android:text="Featured Product"
                 android:fontFamily="@font/poppins_bold"
@@ -242,6 +224,42 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:id="@+id/rv_produk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="25dp"
+                android:text="Hot Deals"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/neutral_dark"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="See More"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="14sp"
+                android:layout_marginStart="140dp"
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/rv_hotdeals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

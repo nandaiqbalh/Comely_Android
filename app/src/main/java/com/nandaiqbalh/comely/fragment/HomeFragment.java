@@ -114,6 +114,29 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(new ProdukAdapter(dataHolder));
 
+        // produk recycler view
+        recyclerView = view.findViewById(R.id.rv_hotdeals);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // menambahkan produk ke holder -> Featured Product
+        dataHolder = new ArrayList<>();
+        Produk hotdeals1 = new Produk("Eiger CRUX 20 WS Backpack", "Rp 314.000,00", R.drawable.eiger_crux_20_ws_backpack);
+        dataHolder.add(hotdeals1);
+        Produk hotdeals2 = new Produk("Eiger TRVLR Cap", "Rp 125.000,00", R.drawable.eiger_trvlr_cap);
+        dataHolder.add(hotdeals2);
+        Produk hotdeals3 = new Produk("Eiger Caldera Pinch Sandals","Rp 170.000,00", R.drawable.eiger_caldera_pinch_sandals);
+        dataHolder.add(hotdeals3);
+        Produk hotdeals4 = new Produk("Eiger Derail Shoulder Bag", "Rp 332.000,00", R.drawable.derail_shoulder_bag);
+        dataHolder.add(hotdeals4);
+        Produk hotdeals5 = new Produk("Eiger Distant Shoulder Bag", "Rp 350.000,00", R.drawable.distant_shoulder_bag);
+        dataHolder.add(hotdeals5);
+
+        LinearLayoutManager hotDealslinearLayoutManager = new LinearLayoutManager(getActivity());
+        hotDealslinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(hotDealslinearLayoutManager);
+
+        recyclerView.setAdapter(new ProdukAdapter(dataHolder));
+
         return view;
 
     }
