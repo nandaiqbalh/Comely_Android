@@ -12,7 +12,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="AKUN FRAGMENT"
-        android:textSize="50dp"
-        android:layout_centerInParent="true"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
         />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="340dp"
+        android:layout_height="57dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Log out"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

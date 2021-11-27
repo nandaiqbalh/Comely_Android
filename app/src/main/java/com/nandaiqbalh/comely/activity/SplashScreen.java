@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
         // meluncurkan
         iv_splash = (ImageView) findViewById(R.id.iv_splash);
         Glide.with(SplashScreen.this)
-                .load(R.drawable.iv_splash)
+                .load(R.drawable.iv_logo)
                 .into(iv_splash);
 
         // postDelayed
