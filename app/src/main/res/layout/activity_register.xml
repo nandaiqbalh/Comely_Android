@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Let's Get Started"
+            android:text="Let's Get Started!"
             android:layout_gravity="center"
             android:textSize="16sp"
             android:textColor="@color/neutral_dark"
@@ -41,6 +41,7 @@
             />
 
         <EditText
+            android:id="@+id/edt_nama"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
@@ -57,6 +58,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_email"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -73,6 +75,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_phone"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -89,6 +92,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/edt_password"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -105,12 +109,22 @@
             android:textSize="12sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_errortext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="12sp"
+            android:textColor="@color/primary_red"/>
+
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_sign_up"
             android:layout_width="340dp"
             android:layout_height="57dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
             android:text="Sign Up"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_bold"
@@ -127,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Already have an account?"
-                android:fontFamily="@font/poppins_light"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/primary_blue"
                 android:textSize="12sp"
                 />

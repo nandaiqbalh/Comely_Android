@@ -12,4 +12,5 @@
     <color name="light">#EBF0FF</color>
     <color name="neutral_color">#FAFAFA</color>
     <color name="neutral_dark">#223263</color>
+    <color name="primary_red">#FB7181</color>
 </resources>
