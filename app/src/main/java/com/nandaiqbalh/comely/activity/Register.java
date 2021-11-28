@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.nandaiqbalh.comely.R;
 
-public class AkunBaruActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_akun_baru);
+        setContentView(R.layout.activity_register);
     }
 }
