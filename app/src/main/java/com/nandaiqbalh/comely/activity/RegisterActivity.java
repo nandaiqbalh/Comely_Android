@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.rest.ApiConfig;
-import com.nandaiqbalh.comely.utils.RegisterRequest;
-import com.nandaiqbalh.comely.utils.RegisterResponse;
+import com.nandaiqbalh.comely.model.register.RegisterRequest;
+import com.nandaiqbalh.comely.model.register.RegisterResponse;
 
 import java.util.regex.Pattern;
 

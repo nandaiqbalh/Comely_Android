@@ -1,4 +1,4 @@
-package com.nandaiqbalh.comely.utils;
+package com.nandaiqbalh.comely.model.register;
 
 public class RegisterRequest {
     private String name;
