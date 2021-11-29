@@ -72,7 +72,7 @@
             android:textColorHint="@color/neutral_grey"
             android:textSize="12sp"
             android:textStyle="bold" />
-        
+
         <Button
             android:id="@+id/btn_login"
             android:layout_width="340dp"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="21dp"
             android:layout_marginTop="21dp">
-            
+
             <ImageView
                 android:layout_width="137dp"
                 android:layout_height="1dp"
@@ -113,7 +113,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="22dp"
                 />
-            
+
         </LinearLayout>
 
         <Button

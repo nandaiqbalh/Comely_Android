@@ -10,10 +10,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.rest.ApiConfig;
+import com.nandaiqbalh.comely.utils.RegisterRequest;
+import com.nandaiqbalh.comely.utils.RegisterResponse;
 
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -60,12 +68,18 @@ public class RegisterActivity extends AppCompatActivity {
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                register();
+                RegisterRequest registerRequest = new RegisterRequest();
+                registerRequest.setName(edtNama.getText().toString());
+                registerRequest.setEmail(edtEmail.getText().toString());
+                registerRequest.setPhone(edtPhone.getText().toString());
+                registerRequest.setPassword(edtPassword.getText().toString());
+
+                register(registerRequest);
             }
         });
-    }
 
-    private void register(){
+    }
+    private void register(RegisterRequest registerRequest){
 
         String emailInput = edtEmail.getText().toString().trim(); // untuk validasi email
         int phoneInput = edtPhone.getText().length(); // untuk validasi nomor telepon
@@ -111,6 +125,33 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        Call<RegisterResponse> registerResponseCall = ApiConfig.getService().registerUser(registerRequest);
+        registerResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                if (response.isSuccessful()){
+
+                    String message = "Successful..";
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+
+//                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                    finish();
+//                    startActivity(intent);
+
+
+                } else {
+                    String message = "An error occured during register. Please try again later!";
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+
+                String message = t.getLocalizedMessage();
+                Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
