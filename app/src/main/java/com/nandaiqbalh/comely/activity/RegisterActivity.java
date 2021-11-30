@@ -154,14 +154,16 @@ public class RegisterActivity extends AppCompatActivity {
                     // berhasil
                     Toast.makeText(RegisterActivity.this, "Welcome " + respon.getUser().getName() + "! Successfully Register!", Toast.LENGTH_LONG).show();
 
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    finish();
+                    startActivity(intent);
+
                 } else {
                     // gagal
                     Toast.makeText(RegisterActivity.this, "Error : " + respon.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                finish();
-                startActivity(intent);
+
 
             }
 
