@@ -11,11 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.adapter.ProdukAdapter;
-import com.nandaiqbalh.comely.model.Produk;
+import com.nandaiqbalh.comely.model.produk.Produk;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;

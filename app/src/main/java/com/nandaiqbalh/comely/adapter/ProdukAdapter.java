@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nandaiqbalh.comely.R;
-import com.nandaiqbalh.comely.model.Produk;
+import com.nandaiqbalh.comely.model.produk.Produk;
 
 import java.util.ArrayList;
 

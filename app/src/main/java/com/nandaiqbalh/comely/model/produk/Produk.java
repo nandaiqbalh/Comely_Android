@@ -1,4 +1,4 @@
-package com.nandaiqbalh.comely.model;
+package com.nandaiqbalh.comely.model.produk;
 
 import java.io.Serializable;
 

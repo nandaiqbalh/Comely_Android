@@ -1,8 +1,11 @@
 package com.nandaiqbalh.comely.model.register;
 
+import com.nandaiqbalh.comely.model.user.User;
+
 public class RegisterResponse {
    private int success = 0;
    private String message;
+   private User user = new User();
 
     public int getSuccess() {
         return success;
@@ -18,5 +21,13 @@ public class RegisterResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
