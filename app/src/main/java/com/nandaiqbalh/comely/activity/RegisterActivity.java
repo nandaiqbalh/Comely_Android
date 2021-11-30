@@ -1,7 +1,5 @@
 package com.nandaiqbalh.comely.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,10 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.nandaiqbalh.comely.R;
-import com.nandaiqbalh.comely.rest.ApiConfig;
 import com.nandaiqbalh.comely.model.register.RegisterRequest;
 import com.nandaiqbalh.comely.model.register.RegisterResponse;
+import com.nandaiqbalh.comely.rest.ApiConfig;
 
 import java.util.regex.Pattern;
 
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         mainButton();
     }
 
-    private void mainButton(){
+    private void mainButton() {
         tv_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-    private void register(RegisterRequest registerRequest){
+
+    private void register(RegisterRequest registerRequest) {
 
         String emailInput = edtEmail.getText().toString().trim(); // untuk validasi email
         int phoneInput = edtPhone.getText().length(); // untuk validasi nomor telepon
@@ -129,20 +130,22 @@ public class RegisterActivity extends AppCompatActivity {
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                if (response.isSuccessful()){
 
-                    String message = "Successful..";
-                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                RegisterResponse respon = response.body();
 
-//                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                    finish();
-//                    startActivity(intent);
-
+                if (respon.getSuccess() == 1) {
+                    // berhasil
+                    Toast.makeText(RegisterActivity.this, "Success : " + respon.getMessage(), Toast.LENGTH_LONG).show();
 
                 } else {
-                    String message = "An error occured during register. Please try again later!";
-                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                    // gagal
+                    Toast.makeText(RegisterActivity.this, "Error : " + respon.getMessage(), Toast.LENGTH_LONG).show();
                 }
+
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                finish();
+                startActivity(intent);
+
             }
 
             @Override
