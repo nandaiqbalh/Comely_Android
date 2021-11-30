@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tvErrorText;
 
     TextView tvDummyUser;
+
+    ProgressBar progressBarRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,10 +146,16 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // PROGRESS BAR
+        progressBarRegister = (ProgressBar) findViewById(R.id.pb_register);
+        progressBarRegister.setVisibility(View.VISIBLE);
+
         Call<RegisterResponse> registerResponseCall = ApiConfig.getService().registerUser(registerRequest);
         registerResponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
+                progressBarRegister.setVisibility(View.GONE);
 
                 RegisterResponse respon = response.body();
 
@@ -169,6 +178,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
+
+                progressBarRegister.setVisibility(View.GONE);
 
                 String message = t.getLocalizedMessage();
                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
