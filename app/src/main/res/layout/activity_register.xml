@@ -138,13 +138,13 @@
             android:layout_marginTop="15dp">
 
             <TextView
+                android:id="@+id/tv_untuk_dummy_user"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Already have an account?"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_regular"
+                android:text="Already have an account?"
                 android:textColor="@color/primary_blue"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_sign_in"

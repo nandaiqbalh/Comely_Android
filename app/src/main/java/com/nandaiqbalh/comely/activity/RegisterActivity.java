@@ -33,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextView tvErrorText;
 
+    TextView tvDummyUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +53,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         tvErrorText = (TextView) findViewById(R.id.tv_errortext);
 
+        tvDummyUser = (TextView) findViewById(R.id.tv_untuk_dummy_user);
+
         // function button
         mainButton();
+    }
+
+    private void dummyUser(){
+        edtNama.setText("Dummy User");
+        edtEmail.setText("dummy@gmail.com");
+        edtPhone.setText("08976545361");
+        edtPassword.setText("qwerty123");
     }
 
     private void mainButton() {
@@ -78,6 +89,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        tvDummyUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dummyUser();
+            }
+        });
     }
 
     private void register(RegisterRequest registerRequest) {
