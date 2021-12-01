@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvErrorTextLogin;
     ProgressBar progressBarLogin;
 
+    LinearLayout linearDummyUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         edtPasswordLogin = (EditText) findViewById(R.id.edt_password_login);
 
         tvErrorTextLogin = (TextView) findViewById(R.id.tv_errortext_login);
+
+        linearDummyUser = (LinearLayout) findViewById(R.id.linear_dummy_user);
 
         mainButton();
 
@@ -88,6 +93,15 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        // dummy user
+        linearDummyUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtEmailLogin.setText("user@gmail.com");
+                edtPasswordLogin.setText("qwerty123");
             }
         });
 

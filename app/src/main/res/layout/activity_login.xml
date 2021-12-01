@@ -97,6 +97,7 @@
             android:background="@drawable/btn_bg"/>
 
         <LinearLayout
+            android:id="@+id/linear_dummy_user"
             android:layout_width="match_parent"
             android:layout_height="21dp"
             android:layout_marginTop="21dp">
