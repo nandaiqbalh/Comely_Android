@@ -30,27 +30,28 @@
             android:layout_marginTop="15dp"/>
 
         <LinearLayout
+            android:id="@+id/linear_account_profile"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:orientation="horizontal"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_user"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_user" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Profile"
                 android:textColor="@color/neutral_dark"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_bold"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

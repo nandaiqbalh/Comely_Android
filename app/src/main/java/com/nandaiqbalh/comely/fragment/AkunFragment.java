@@ -1,5 +1,6 @@
 package com.nandaiqbalh.comely.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
+import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.activity.userprofile.ProfileActivity;
 import com.nandaiqbalh.comely.helper.SharedPrefs;
 
 /**
@@ -61,13 +65,29 @@ public class AkunFragment extends Fragment {
 
     SharedPrefs s;
     Button logoutButton;
+
+    LinearLayout linearAccountProfile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_akun, container, false);
+
         logoutButton = (Button) view.findViewById(R.id.btn_logout);
 
+        linearAccountProfile = (LinearLayout) view.findViewById(R.id.linear_account_profile);
+
+        // method main button
+        mainButton();
+
         s = new SharedPrefs(getActivity());
+
+
+        return view;
+    }
+
+    private void mainButton(){
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +95,13 @@ public class AkunFragment extends Fragment {
                 s.setStatusLogin(false);
             }
         });
-        return view;
+
+        linearAccountProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
