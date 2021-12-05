@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -15,6 +16,8 @@ import com.nandaiqbalh.comely.R;
 public class ProfileActivity extends AppCompatActivity {
 
     LinearLayout btnBackFromProfile;
+
+    Button btnChangeProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void inisiasiVariabel(){
         btnBackFromProfile = (LinearLayout) findViewById(R.id.btn_back_from_profile);
+
+        btnChangeProfile = (Button) findViewById(R.id.btn_change_profile);
     }
 
     private void  mainButton(){
@@ -41,6 +46,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnChangeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, ChangeProfileActivity.class);
                 startActivity(intent);
                 finish();
             }
