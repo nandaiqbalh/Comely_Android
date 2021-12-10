@@ -2,24 +2,34 @@ package com.nandaiqbalh.comely.activity.userprofile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.adapter.CustomSpinnerAdapter;
 import com.nandaiqbalh.comely.helper.CustomItemSpinner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ChangeProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // Spinner
     Spinner customSpinner;
     ArrayList<CustomItemSpinner> customList;
     int width = 200;
+
+    // Date
+    EditText edt_Date;
+    DatePickerDialog.OnDateSetListener dateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +42,13 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
         inisialisasiVariabel();
         customSpinner();
 
+        customDate();
+
     }
 
     private void inisialisasiVariabel(){
         customSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        edt_Date = (EditText) findViewById(R.id.edt_birthday_update);
     }
 
     private void customSpinner(){
@@ -47,6 +60,31 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
             customSpinner.setAdapter(customSpinnerAdapter);
             customSpinner.setOnItemSelectedListener(this);
         }
+    }
+
+    private void customDate(){
+
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        edt_Date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        ChangeProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month +1;
+                        String date = day + " - " + month + " - " + year;
+                        edt_Date.setText(date);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
     }
 
     private ArrayList<CustomItemSpinner> getCustomList() {

@@ -153,12 +153,13 @@
                         android:drawableStart="@drawable/ic_calendar"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:hint="31 Desember 2001"
+                        android:hint="Your Birthday Here"
                         android:padding="10dp"
                         android:textColor="@color/primary_blue"
                         android:textColorHint="@color/neutral_grey"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
