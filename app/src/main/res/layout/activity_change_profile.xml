@@ -135,7 +135,7 @@
                         android:id="@+id/spinner_gender"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@drawable/bg_input"/>
+                        android:background="@drawable/bg_input" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,6 +145,7 @@
                         android:layout_marginTop="5dp"
                         android:textColor="@color/neutral_dark"
                         android:fontFamily="@font/poppins_bold"/>
+
                     <EditText
                         android:id="@+id/edt_birthday_update"
                         android:layout_width="match_parent"
@@ -159,6 +160,7 @@
                         android:textColorHint="@color/neutral_grey"
                         android:textSize="12sp"
                         android:textStyle="bold"
+                        android:editable="false"
                         />
 
                     <TextView

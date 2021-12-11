@@ -19,8 +19,8 @@
         android:text="Gender"
         android:textColor="@color/neutral_grey"
         android:textSize="12sp"
+        android:textStyle="bold"
         android:fontFamily="@font/poppins_regular"
-        android:padding="10dp"
         android:layout_gravity="center_vertical"/>
 
 </LinearLayout>

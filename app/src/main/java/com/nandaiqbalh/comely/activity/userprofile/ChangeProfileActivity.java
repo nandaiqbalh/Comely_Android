@@ -3,10 +3,12 @@ package com.nandaiqbalh.comely.activity.userprofile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,6 +33,9 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
     EditText edt_Date;
     DatePickerDialog.OnDateSetListener dateSetListener;
 
+    // Button
+    LinearLayout btnBackFromUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +49,28 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
 
         customDate();
 
+        // mainButton
+        mainButton();
     }
 
     private void inisialisasiVariabel(){
+
         customSpinner = (Spinner) findViewById(R.id.spinner_gender);
         edt_Date = (EditText) findViewById(R.id.edt_birthday_update);
+
+        btnBackFromUpdate = (LinearLayout) findViewById(R.id.btn_back_from_profile);
+    }
+
+    private void mainButton(){
+        // back
+        btnBackFromUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChangeProfileActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void customSpinner(){
@@ -90,8 +112,8 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
     private ArrayList<CustomItemSpinner> getCustomList() {
 
         customList = new ArrayList<>();
-        customList.add(new CustomItemSpinner("Male", R.drawable.ic_calendar));
-        customList.add(new CustomItemSpinner("Female", R.drawable.ic_gender));
+        customList.add(new CustomItemSpinner("Male", R.drawable.ic_male_gender));
+        customList.add(new CustomItemSpinner("Female", R.drawable.ic_female_gender));
 
         return customList;
     }

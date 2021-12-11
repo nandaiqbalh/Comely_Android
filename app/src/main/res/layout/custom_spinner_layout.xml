@@ -27,7 +27,7 @@
             android:textColor="@color/neutral_grey"
             android:textSize="12sp"
             android:fontFamily="@font/poppins_regular"
-            android:padding="10dp"
+            android:textStyle="bold"
             android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
