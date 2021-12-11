@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +95,12 @@ public class AkunFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 s.setStatusLogin(false);
+
+                HomeFragment homeFragment = new HomeFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.container, homeFragment);
+                ft.commit();
             }
         });
 

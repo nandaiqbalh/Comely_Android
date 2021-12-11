@@ -5,7 +5,10 @@ public class User {
     private int userID = 0;
     private String email;
     private String name;
+    private String username;
     private String phone;
+    private String gender;
+    private String birthday;
 
     public int getUserID() {
         return userID;
@@ -37,5 +40,29 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }
