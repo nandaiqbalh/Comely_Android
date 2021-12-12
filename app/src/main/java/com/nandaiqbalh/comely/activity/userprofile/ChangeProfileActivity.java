@@ -16,8 +16,11 @@ import android.widget.Spinner;
 
 import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.activity.LoginActivity;
 import com.nandaiqbalh.comely.adapter.CustomSpinnerAdapter;
 import com.nandaiqbalh.comely.helper.CustomItemSpinner;
+import com.nandaiqbalh.comely.helper.SharedPrefs;
+import com.nandaiqbalh.comely.model.user.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +39,11 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
     // Button
     LinearLayout btnBackFromUpdate;
 
+    // Form
+    EditText edtName, edtUsername, edtEmail, edtPhone;
+
+    SharedPrefs s;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +59,25 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
 
         // mainButton
         mainButton();
+
+        // atur default value form
+        aturValueForm();
     }
 
     private void inisialisasiVariabel(){
 
         customSpinner = (Spinner) findViewById(R.id.spinner_gender);
         edt_Date = (EditText) findViewById(R.id.edt_birthday_update);
+        // Lanjutan form
+        edtName = (EditText) findViewById(R.id.edt_name_update);
+        edtUsername = (EditText) findViewById(R.id.edt_username_update);
+        edtEmail = (EditText) findViewById(R.id.edt_email_update);
+        edtPhone = (EditText) findViewById(R.id.edt_phone_update);
 
         btnBackFromUpdate = (LinearLayout) findViewById(R.id.btn_back_from_profile);
+
+        // shared prefs
+        s = new SharedPrefs(ChangeProfileActivity.this);
     }
 
     private void mainButton(){
@@ -71,6 +90,42 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
                 finish();
             }
         });
+    }
+
+    private void aturValueForm(){
+        if (s.getUser() == null){
+            Intent intent = new Intent(ChangeProfileActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return;
+        }
+
+        User user = s.getUser();
+
+        edtName.setText(user.getName());
+        edtPhone.setText(user.getPhone());
+        edtEmail.setText(user.getEmail());
+
+        if (user.getUsername() == null){
+            edtUsername.setText("Not set.");
+        } else {
+            edtUsername.setText(user.getUsername());
+        }
+
+
+        if (user.getGender().equalsIgnoreCase("Male")){
+
+            customSpinner.setSelection(0);
+        } else if (user.getGender().equalsIgnoreCase("Female")){
+            customSpinner.setSelection(1);
+        }
+
+        if (user.getBirthday() == null){
+            edt_Date.setText("Not set.");
+        } else {
+            edt_Date.setText(user.getBirthday());
+        }
     }
 
     private void customSpinner(){
