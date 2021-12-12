@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.activity.LoginActivity;
 import com.nandaiqbalh.comely.helper.SharedPrefs;
+import com.nandaiqbalh.comely.model.user.User;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -83,26 +85,36 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void aturValueText(){
 
-        tvName.setText(s.getString(s.getName()));
-        tvEmail.setText(s.getString(s.getEmail()));
-        tvPhone.setText(s.getString(s.getPhone()));
+        if (s.getUser() == null){
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return;
+        }
 
-        if (s.getString(s.getUsername()) == ""){
+        User user = s.getUser();
+
+        tvName.setText(user.getName());
+        tvPhone.setText(user.getPhone());
+        tvEmail.setText(user.getEmail());
+
+        if (user.getUsername() == null){
             tvUsername.setText("Not set.");
         } else {
-            tvUsername.setText(s.getString(s.getUsername()));
+            tvUsername.setText(user.getUsername());
         }
 
-        if (s.getString(s.getGender()) == ""){
+        if (user.getGender() == null){
             tvGender.setText("Not set.");
         } else {
-            tvGender.setText(s.getString(s.getGender()));
+            tvGender.setText(user.getGender());
         }
 
-        if (s.getString(s.getBirthday()) == ""){
+        if (user.getBirthday() == null){
             tvBirthday.setText("Not set.");
         } else {
-            tvBirthday.setText(s.getString(s.getBirthday()));
+            tvBirthday.setText(user.getBirthday());
         }
     }
 }

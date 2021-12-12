@@ -165,13 +165,16 @@ public class LoginActivity extends AppCompatActivity {
                     // set status login
                     s.setStatusLogin(true);
 
-                    // set string value
+                    // set value user dengan method setUser
+                    s.setUser(respon.getUser()); // manggil kembalian field user secara langsung
+
+                    /*// set string value
                     s.setString(s.getName(), respon.getUser().getName());
                     s.setString(s.getUsername(), respon.getUser().getUsername());
                     s.setString(s.getEmail(), respon.getUser().getEmail());
                     s.setString(s.getPhone(), respon.getUser().getPhone());
                     s.setString(s.getGender(), respon.getUser().getGender());
-                    s.setString(s.getBirthday(), respon.getUser().getBirthday());
+                    s.setString(s.getBirthday(), respon.getUser().getBirthday());*/
 
                 } else {
                     // gagal

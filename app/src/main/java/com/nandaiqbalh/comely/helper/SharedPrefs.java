@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.nandaiqbalh.comely.model.user.User;
+
 public class SharedPrefs {
     String myPref = "MAIN_PREF";
     SharedPreferences sp;
@@ -15,6 +18,9 @@ public class SharedPrefs {
     private String phone = "phone";
     private String gender = "gender";
     private String birthday = "birthday";
+    private String user = "user";
+
+    Gson gson = new Gson();
 
     public SharedPrefs(Activity activity) {
         sp = activity.getSharedPreferences(myPref, Context.MODE_PRIVATE);
@@ -27,6 +33,24 @@ public class SharedPrefs {
 
     public boolean getStatusLogin() {
         return sp.getBoolean(login, false);
+    }
+
+    // Setter bertipe User untuk memanggil langsung semua field di dalam user, agar ga manggil satu per satu
+    public void setUser(User value) {
+        String data = gson.toJson(value, User.class); // ubah data dari bentuk Object Class ke dalam bentuk String
+        sp.edit().putString(String.valueOf(user), data).apply();
+    }
+
+    // Getter bertipe User untuk memanggil langsung semua field di dalam user, agar ga manggil satu per satu
+    public User getUser(){
+        String data;
+        data = sp.getString(String.valueOf(this.user), null); // ubah data dari bentuk String ke dalam bentuk Object Class
+
+        if (data != null){
+            return gson.fromJson(data, User.class);
+        } else {
+            return null;
+        }
     }
 
     public void setString(String key, String value) {
