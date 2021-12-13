@@ -1,6 +1,7 @@
 package com.nandaiqbalh.comely.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,16 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.activity.LoginActivity;
 import com.nandaiqbalh.comely.adapter.ProdukAdapter;
 import com.nandaiqbalh.comely.model.produk.Produk;
+import com.nandaiqbalh.comely.model.produk.network.ProductResponse;
+import com.nandaiqbalh.comely.model.userlogin.LoginResponse;
+import com.nandaiqbalh.comely.rest.ApiConfig;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderLayout;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,18 +94,20 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        sliderLayout = view.findViewById(R.id.slider);
-        sliderLayout.setIndicatorAnimation(IndicatorAnimations.FILL);
-        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
-        sliderLayout.setScrollTimeInSec(2);
+        // inisialisasi
+        inisialisasi(view);
 
-        setSliderViews();
+        // display slider
+        displaySlider();
 
-        // produk recycler view
-        recyclerView = view.findViewById(R.id.rv_produk);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // get product hot deals
+        getProductHotDeals();
 
-        // menambahkan produk ke holder -> Featured Product
+
+
+       /**
+        * CARA OFFLINE DISPLAY PRODUCT SLIDER
+        * // menambahkan produk ke holder -> Featured Product
         dataHolder = new ArrayList<>();
         Produk produk1 = new Produk("Eiger CRUX 20 WS Backpack", "Rp 314.000,00", R.drawable.eiger_crux_20_ws_backpack);
         dataHolder.add(produk1);
@@ -107,15 +120,8 @@ public class HomeFragment extends Fragment {
         Produk produk5 = new Produk("Eiger Distant Shoulder Bag", "Rp 350.000,00", R.drawable.distant_shoulder_bag);
         dataHolder.add(produk5);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
 
-        recyclerView.setAdapter(new ProdukAdapter(dataHolder));
 
-        // produk recycler view
-        recyclerView = view.findViewById(R.id.rv_hotdeals);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // menambahkan produk ke holder -> Featured Product
         dataHolder = new ArrayList<>();
@@ -130,14 +136,66 @@ public class HomeFragment extends Fragment {
         Produk hotdeals5 = new Produk("Eiger Distant Shoulder Bag", "Rp 350.000,00", R.drawable.distant_shoulder_bag);
         dataHolder.add(hotdeals5);
 
-        LinearLayoutManager hotDealslinearLayoutManager = new LinearLayoutManager(getActivity());
-        hotDealslinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(hotDealslinearLayoutManager);
-
-        recyclerView.setAdapter(new ProdukAdapter(dataHolder));
+        */
 
         return view;
 
+    }
+
+    private void inisialisasi(View view){
+        sliderLayout = view.findViewById(R.id.slider);
+
+        // produk recycler view
+        recyclerView = view.findViewById(R.id.rv_featured_product);
+
+        // produk recycler view
+        recyclerView = view.findViewById(R.id.rv_hotdeals);
+
+    }
+
+    private ArrayList<Produk> hotDealsArrayList = new ArrayList<>();
+    private void getProductHotDeals(){
+        Call<ProductResponse> productResponseCall = ApiConfig.getService().productHotDeals();
+        productResponseCall.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+
+                ProductResponse respon = response.body();
+                if (respon.getSuccess() == 1){
+                    hotDealsArrayList = respon.getProduct();
+                    displayProduct();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void displaySlider(){
+        sliderLayout.setIndicatorAnimation(IndicatorAnimations.FILL);
+        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
+        sliderLayout.setScrollTimeInSec(2);
+
+        setSliderViews();
+    }
+
+    private void displayProduct(){
+
+        // featured product
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
+
+
+        // hot deals product
+        LinearLayoutManager hotDealslinearLayoutManager = new LinearLayoutManager(getActivity());
+        hotDealslinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(hotDealslinearLayoutManager);
+        recyclerView.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
     }
 
     private void setSliderViews() {

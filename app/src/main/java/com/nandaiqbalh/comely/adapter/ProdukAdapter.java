@@ -1,5 +1,6 @@
 package com.nandaiqbalh.comely.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.model.produk.Produk;
+import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHolder> {
 
+    Activity activity;
     ArrayList<Produk> dataHolder;
 
     // constructor
-    public ProdukAdapter(ArrayList<Produk> dataHolder){
+    public ProdukAdapter(Activity activity, ArrayList<Produk> dataHolder){
+        this.activity = activity;
         this.dataHolder = dataHolder;
     }
 
@@ -33,9 +39,17 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.gambarProduk.setImageResource(dataHolder.get(position).getGambarProduk());
-        holder.namaProduk.setText(dataHolder.get(position).getNamaProduk());
-        holder.hargaProduk.setText(dataHolder.get(position).getHargaProduk());
+        holder.namaProduk.setText(dataHolder.get(position).getProduct_name_eng());
+        holder.hargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(dataHolder.get(position).getSelling_prize())));
+        // Gambar
+        String imageURL = "http://192.168.160.130/udemy/latihan_ecommerce/public/" + dataHolder.get(position).getProduct_thumbnail();
+        Picasso.get()
+                .load(imageURL)
+                .placeholder(R.drawable.iv_logo)
+                .error(R.drawable.iv_logo)
+                .into(holder.gambarProduk);
+
+
     }
 
     @Override
