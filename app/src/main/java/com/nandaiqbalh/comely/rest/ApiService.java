@@ -26,4 +26,7 @@ public interface ApiService {
     @GET("product/get-hotdeals")
     Call<ProductResponse> productHotDeals();
 
+    @GET("product/get-featured")
+    Call<ProductResponse> productFeatured();
+
 }

@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
     SliderLayout sliderLayout;
 
     // recycler view
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewFeatured, recyclerViewHotDeals;
     ArrayList<Produk> dataHolder;
 
     @SuppressLint("ResourceAsColor")
@@ -100,6 +100,8 @@ public class HomeFragment extends Fragment {
         // display slider
         displaySlider();
 
+        // get product featured
+        getProductFeatured();
         // get product hot deals
         getProductHotDeals();
 
@@ -146,12 +148,34 @@ public class HomeFragment extends Fragment {
         sliderLayout = view.findViewById(R.id.slider);
 
         // produk recycler view
-        recyclerView = view.findViewById(R.id.rv_featured_product);
+        recyclerViewFeatured = view.findViewById(R.id.rv_featured_product);
 
         // produk recycler view
-        recyclerView = view.findViewById(R.id.rv_hotdeals);
+        recyclerViewHotDeals = view.findViewById(R.id.rv_hotdeals);
 
     }
+
+    private ArrayList<Produk> featuredArrayList = new ArrayList<>();
+    private void getProductFeatured(){
+        Call<ProductResponse> productResponseCall = ApiConfig.getService().productFeatured();
+        productResponseCall.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+
+                ProductResponse respon = response.body();
+                if (respon.getSuccess() == 1){
+                    featuredArrayList = respon.getProduct();
+                    displayProduct();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     private ArrayList<Produk> hotDealsArrayList = new ArrayList<>();
     private void getProductHotDeals(){
@@ -185,17 +209,17 @@ public class HomeFragment extends Fragment {
     private void displayProduct(){
 
         // featured product
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
+        LinearLayoutManager featuredLinearLayoutManager = new LinearLayoutManager(getActivity());
+        featuredLinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewFeatured.setLayoutManager(featuredLinearLayoutManager);
+        recyclerViewFeatured.setAdapter(new ProdukAdapter(requireActivity(), featuredArrayList));
 
 
         // hot deals product
         LinearLayoutManager hotDealslinearLayoutManager = new LinearLayoutManager(getActivity());
         hotDealslinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(hotDealslinearLayoutManager);
-        recyclerView.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
+        recyclerViewHotDeals.setLayoutManager(hotDealslinearLayoutManager);
+        recyclerViewHotDeals.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
     }
 
     private void setSliderViews() {
