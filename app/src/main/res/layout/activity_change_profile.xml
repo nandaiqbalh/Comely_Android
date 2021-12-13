@@ -64,7 +64,7 @@
                     <ImageView
                         android:id="@+id/iv_picture_profile"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/iv_profile_picture" />
 
@@ -162,29 +162,6 @@
                         android:textStyle="bold"
                         android:editable="false"
                         />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:textSize="12sp"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/neutral_dark"
-                        android:fontFamily="@font/poppins_bold"/>
-                    <EditText
-                        android:id="@+id/edt_email_update"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_input"
-                        android:drawableStart="@drawable/ic_email_profile"
-                        android:drawablePadding="10dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="derlaxyy123@gmail.com"
-                        android:padding="10dp"
-                        android:textColor="@color/primary_blue"
-                        android:textColorHint="@color/neutral_grey"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"

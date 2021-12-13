@@ -40,7 +40,7 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
     LinearLayout btnBackFromUpdate;
 
     // Form
-    EditText edtName, edtUsername, edtEmail, edtPhone;
+    EditText edtName, edtUsername, edtPhone;
 
     SharedPrefs s;
 
@@ -71,7 +71,6 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
         // Lanjutan form
         edtName = (EditText) findViewById(R.id.edt_name_update);
         edtUsername = (EditText) findViewById(R.id.edt_username_update);
-        edtEmail = (EditText) findViewById(R.id.edt_email_update);
         edtPhone = (EditText) findViewById(R.id.edt_phone_update);
 
         btnBackFromUpdate = (LinearLayout) findViewById(R.id.btn_back_from_profile);
@@ -105,7 +104,6 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
 
         edtName.setText(user.getName());
         edtPhone.setText(user.getPhone());
-        edtEmail.setText(user.getEmail());
 
         if (user.getUsername() == null){
             edtUsername.setText("Not set.");
@@ -114,8 +112,7 @@ public class ChangeProfileActivity extends AppCompatActivity implements AdapterV
         }
 
 
-        if (user.getGender().equalsIgnoreCase("Male")){
-
+        if (user.getGender() == null){
             customSpinner.setSelection(0);
         } else if (user.getGender().equalsIgnoreCase("Female")){
             customSpinner.setSelection(1);

@@ -4,6 +4,8 @@ import com.nandaiqbalh.comely.model.register.RegisterRequest;
 import com.nandaiqbalh.comely.model.register.RegisterResponse;
 import com.nandaiqbalh.comely.model.userlogin.LoginRequest;
 import com.nandaiqbalh.comely.model.userlogin.LoginResponse;
+import com.nandaiqbalh.comely.model.userupdate.UpdateUserRequest;
+import com.nandaiqbalh.comely.model.userupdate.UpdateUserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,5 +17,8 @@ public interface ApiService {
 
     @POST("user/login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+
+    @POST("user/update")
+    Call<UpdateUserResponse> updateUser(@Body UpdateUserRequest updateUserRequest);
 
 }
