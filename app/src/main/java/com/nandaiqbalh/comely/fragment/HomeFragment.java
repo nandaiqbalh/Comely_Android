@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
     SliderLayout sliderLayout;
 
     // recycler view
-    RecyclerView recyclerViewFeatured, recyclerViewHotDeals;
+    RecyclerView recyclerViewFeatured, recyclerViewHotDeals, rvAllProduct;
     ArrayList<Produk> dataHolder;
 
     @SuppressLint("ResourceAsColor")
@@ -104,6 +104,8 @@ public class HomeFragment extends Fragment {
         getProductFeatured();
         // get product hot deals
         getProductHotDeals();
+        // get all product
+        getAllProduct();
 
 
 
@@ -153,6 +155,9 @@ public class HomeFragment extends Fragment {
         // produk recycler view
         recyclerViewHotDeals = view.findViewById(R.id.rv_hotdeals);
 
+        // produk recycler view
+        rvAllProduct = view.findViewById(R.id.rv_all_product);
+
     }
 
     private ArrayList<Produk> featuredArrayList = new ArrayList<>();
@@ -198,6 +203,26 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private ArrayList<Produk> allProductArrayList = new ArrayList<>();
+    private void getAllProduct(){
+        Call<ProductResponse> productResponseCall = ApiConfig.getService().productAll();
+        productResponseCall.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                ProductResponse respon = response.body();
+                if (respon.getSuccess() == 1){
+                    allProductArrayList = respon.getProduct();
+                    displayProduct();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void displaySlider(){
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.FILL);
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
@@ -220,6 +245,12 @@ public class HomeFragment extends Fragment {
         hotDealslinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewHotDeals.setLayoutManager(hotDealslinearLayoutManager);
         recyclerViewHotDeals.setAdapter(new ProdukAdapter(requireActivity(), hotDealsArrayList));
+
+        // all product
+        LinearLayoutManager allProductLinearLayoutManager = new LinearLayoutManager(getActivity());
+        allProductLinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        rvAllProduct.setLayoutManager(allProductLinearLayoutManager);
+        rvAllProduct.setAdapter(new ProdukAdapter(requireActivity(), allProductArrayList));
     }
 
     private void setSliderViews() {

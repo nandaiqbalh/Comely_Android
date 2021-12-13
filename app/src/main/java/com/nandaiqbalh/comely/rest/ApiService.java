@@ -29,4 +29,7 @@ public interface ApiService {
     @GET("product/get-featured")
     Call<ProductResponse> productFeatured();
 
+    @GET("product/get-all")
+    Call<ProductResponse> productAll();
+
 }

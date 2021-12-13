@@ -213,7 +213,7 @@
                     <TextView
                         android:layout_width="128dp"
                         android:layout_height="25dp"
-                        android:text="Featured Product"
+                        android:text="Featured Products"
                         android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/neutral_dark"
                         android:textSize="14sp"
@@ -295,7 +295,7 @@
                     <TextView
                         android:layout_width="128dp"
                         android:layout_height="25dp"
-                        android:text="Recomended"
+                        android:text="All Products"
                         android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/neutral_dark"
                         android:textSize="14sp"
@@ -314,7 +314,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_marginTop="10dp"
-                    android:id="@+id/rv_recommended"
+                    android:id="@+id/rv_all_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
