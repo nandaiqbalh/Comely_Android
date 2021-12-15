@@ -1,6 +1,7 @@
 package com.nandaiqbalh.comely.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.activity.product.ProductDetailActivity;
 import com.nandaiqbalh.comely.model.produk.Produk;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +52,14 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
                 .error(R.drawable.iv_logo)
                 .into(holder.gambarProduk);
 
+        holder.layoutProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ProductDetailActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -61,12 +72,16 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
 
         ImageView gambarProduk;
         TextView namaProduk, hargaProduk;
+        CardView layoutProduct;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             gambarProduk = itemView.findViewById(R.id.img_gambar_produk);
             namaProduk = itemView.findViewById(R.id.tv_nama_produk);
             hargaProduk = itemView.findViewById(R.id.tv_harga_produk);
+
+            // layout card view
+            layoutProduct = itemView.findViewById(R.id.cv_layout_product);
         }
     }
 }
