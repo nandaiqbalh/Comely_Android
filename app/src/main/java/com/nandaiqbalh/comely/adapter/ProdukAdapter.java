@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.activity.product.ProductDetailActivity;
 import com.nandaiqbalh.comely.model.produk.Produk;
@@ -25,6 +26,10 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
 
     Activity activity;
     ArrayList<Produk> dataHolder;
+
+    // putString
+    Gson gson = new Gson();
+    Produk produk;
 
     // constructor
     public ProdukAdapter(Activity activity, ArrayList<Produk> dataHolder){
@@ -56,6 +61,9 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ProductDetailActivity.class);
+
+                String stringData = gson.toJson(dataHolder.get(position), Produk.class); // cast data Produk ke dalam string
+                intent.putExtra("extra", stringData);
                 activity.startActivity(intent);
             }
         });
