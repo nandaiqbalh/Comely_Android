@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.activity.product.ProductDetailActivity;
+import com.nandaiqbalh.comely.model.brand.Brand;
 import com.nandaiqbalh.comely.model.produk.Produk;
 import com.squareup.picasso.Picasso;
 

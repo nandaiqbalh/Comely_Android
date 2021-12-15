@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.helper.SharedPrefs;
+import com.nandaiqbalh.comely.model.brand.Brand;
 import com.nandaiqbalh.comely.model.produk.Produk;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +28,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     // intent getExtra
     Gson gson = new Gson();
     Produk produk;
+    Brand brand;
 
     // Toolbar
     Toolbar toolbar;
@@ -63,11 +66,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         String dataProduk = getIntent().getStringExtra("extra"); // ambil value dari intent
         produk = gson.fromJson(dataProduk, Produk.class); // cast dari bentuk String ke bentuk Object Produk
 
+
+
         // set value
         if (produk != null){
             tvNamaProduk.setText(produk.getProduct_name_eng());
             tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
-            tvDeskripsiProduk.setText(produk.getLong_desc_eng());
+            tvDeskripsiProduk.setText(produk.getShort_desc_eng());
+            tvKodeProduk.setText(produk.getProduct_code());
+
+            tvBrand.setText("Unregistered Brand.");
 
             // Gambar
             String imageURL =  "http://192.168.160.130/udemy/latihan_ecommerce/public/" + produk.getProduct_thumbnail();
