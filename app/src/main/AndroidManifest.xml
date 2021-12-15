@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nandaiqbalh.comely">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -15,9 +16,8 @@
         android:theme="@style/Theme.Comely"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".activity.userprofile.ChangeProfileActivity"></activity>
-
+        <activity android:name=".activity.product.ProductDetailActivity"></activity>
+        <activity android:name=".activity.userprofile.ChangeProfileActivity" />
         <activity android:name=".activity.userprofile.ProfileActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity" />
