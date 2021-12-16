@@ -4,18 +4,18 @@
     <item
         android:id="@+id/nav_beranda"
         android:icon="@drawable/icon_beranda"
-        android:title="Beranda" />
+        android:title="Explore" />
 
     <item
         android:id="@+id/nav_keranjang"
         android:icon="@drawable/icon_keranjang"
-        android:title="Keranjang"
+        android:title="My Chart"
 
         android:visible="true" />
 
     <item
         android:id="@+id/nav_akun"
         android:icon="@drawable/icon_akun"
-        android:title="Akun" />
+        android:title="Account" />
 
 </menu>

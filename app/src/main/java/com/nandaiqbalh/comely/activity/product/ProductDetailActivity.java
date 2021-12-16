@@ -1,8 +1,12 @@
 package com.nandaiqbalh.comely.activity.product;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.nandaiqbalh.comely.R;
+import com.nandaiqbalh.comely.adapter.CustomSpinnerAdapter;
+import com.nandaiqbalh.comely.helper.CustomItemSpinner;
 import com.nandaiqbalh.comely.model.brand.Brand;
 import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
 import com.nandaiqbalh.comely.model.produk.Produk;
@@ -24,10 +30,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ImageView ivGambarProduk;
     TextView tvNamaProduk, tvHargaProduk, tvBrand, tvKodeProduk, tvDeskripsiProduk;
+
+    Spinner sizeSpinner;
+    ArrayList<CustomItemSpinner> customSizeList;
+    int width = 200;
+
+
 
     // intent getExtra
     Gson gson = new Gson();
@@ -51,8 +63,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         // get info produk
         getInformasiProduk();
 
-        // get all brand
-        getAllBrand();
+//        // get all brand
+//        getAllBrand();
+
+        customSizeSpinner();
     }
 
     private void inisialisasi() {
@@ -62,6 +76,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvBrand = (TextView) findViewById(R.id.tv_brand_detail);
         tvKodeProduk = (TextView) findViewById(R.id.tv_code_detail);
         tvDeskripsiProduk = (TextView) findViewById(R.id.tv_deskripsi_detail);
+
+        // Spinner
+        sizeSpinner = (Spinner) findViewById(R.id.spinner_size);
 
         // toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,6 +96,9 @@ public class ProductDetailActivity extends AppCompatActivity {
             tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
             tvDeskripsiProduk.setText(produk.getShort_desc_eng());
             tvKodeProduk.setText(produk.getProduct_code());
+
+            // brand name (unsuccess)
+            tvBrand.setText("Unregistered Brand");
 
 
             // Gambar
@@ -98,28 +118,78 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<Brand> brandArrayList = new ArrayList<>();
-    private void getAllBrand(){
-        Call<BrandResponse> brandResponseCall = ApiConfig.getService().brandAll();
-        brandResponseCall.enqueue(new Callback<BrandResponse>() {
-            @Override
-            public void onResponse(Call<BrandResponse> call, Response<BrandResponse> response) {
-                BrandResponse respon = response.body();
-                if (respon.getSuccess() == 1){
-                    brandArrayList = respon.getBrand();
-                }
-            }
+//    private ArrayList<Brand> brandArrayList = new ArrayList<>();
+//    private void getAllBrand(){
+//        Call<BrandResponse> brandResponseCall = ApiConfig.getService().brandAll();
+//        brandResponseCall.enqueue(new Callback<BrandResponse>() {
+//            @Override
+//            public void onResponse(Call<BrandResponse> call, Response<BrandResponse> response) {
+//                BrandResponse respon = response.body();
+//                if (respon.getSuccess() == 1){
+//                    brandArrayList = respon.getBrand();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BrandResponse> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
-            @Override
-            public void onFailure(Call<BrandResponse> call, Throwable t) {
+    private void customSizeSpinner(){
 
-            }
-        });
+         customSizeList = getCustomSizeList();
+
+        CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this, customSizeList);
+        if (sizeSpinner != null) {
+            sizeSpinner.setAdapter(customSpinnerAdapter);
+            sizeSpinner.setOnItemSelectedListener(this);
+        }
     }
 
+    private ArrayList<CustomItemSpinner> getCustomSizeList() {
+
+        customSizeList = new ArrayList<>();
+
+        String[] dataSize = produk.getProduct_size_eng().split(",");
+
+        for (int i = 0 ; i < dataSize.length; i++){
+
+            customSizeList.add(new CustomItemSpinner(dataSize[i], R.drawable.ic_checklist));
+        }
+
+
+        return customSizeList;
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        try {
+            LinearLayout linearLayout = findViewById(R.id.layout_custom_spinner);
+            width = linearLayout.getWidth();
+        } catch (Exception e) {
+
+        }
+        sizeSpinner.setDropDownWidth(width);
+
+        CustomItemSpinner item = (CustomItemSpinner) adapterView.getSelectedItem();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
