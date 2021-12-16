@@ -17,23 +17,18 @@ import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.adapter.CustomSpinnerAdapter;
 import com.nandaiqbalh.comely.helper.CustomItemSpinner;
 import com.nandaiqbalh.comely.model.brand.Brand;
-import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
 import com.nandaiqbalh.comely.model.produk.Produk;
-import com.nandaiqbalh.comely.rest.ApiConfig;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ProductDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ImageView ivGambarProduk;
     TextView tvNamaProduk, tvHargaProduk, tvBrand, tvKodeProduk, tvDeskripsiProduk;
+    TextView tvSelectSize, tvSelectColor;
 
     Spinner sizeSpinner;
     ArrayList<CustomItemSpinner> customSizeList;
@@ -80,6 +75,9 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
         tvBrand = (TextView) findViewById(R.id.tv_brand_detail);
         tvKodeProduk = (TextView) findViewById(R.id.tv_code_detail);
         tvDeskripsiProduk = (TextView) findViewById(R.id.tv_deskripsi_detail);
+
+        tvSelectSize = (TextView) findViewById(R.id.tv_select_size);
+        tvSelectColor = (TextView) findViewById(R.id.tv_select_color);
 
         // Spinner
         sizeSpinner = (Spinner) findViewById(R.id.spinner_size);
@@ -142,9 +140,9 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 //        });
 //    }
 
-    private void customSizeSpinner(){
+    private void customSizeSpinner() {
 
-         customSizeList = getCustomSizeList();
+        customSizeList = getCustomSizeList();
 
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this, customSizeList);
         if (sizeSpinner != null) {
@@ -157,18 +155,24 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 
         customSizeList = new ArrayList<>();
 
-        String[] dataSize = produk.getProduct_size_eng().split(",");
+        if (produk.getProduct_size_eng() != null) {
 
-        for (int i = 0 ; i < dataSize.length; i++){
+            String[] dataSize = produk.getProduct_size_eng().split(",");
+            for (int i = 0; i < dataSize.length; i++) {
 
-            customSizeList.add(new CustomItemSpinner(dataSize[i], R.drawable.ic_checklist));
+                customSizeList.add(new CustomItemSpinner(dataSize[i], R.drawable.ic_checklist));
+            }
+
+        } else {
+            tvSelectSize.setVisibility(View.GONE);
+            sizeSpinner.setVisibility(View.GONE);
         }
 
 
         return customSizeList;
     }
 
-    private void customColorSpinner(){
+    private void customColorSpinner() {
 
         customColorList = getCustomColorList();
 
@@ -183,12 +187,18 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 
         customColorList = new ArrayList<>();
 
-        String[] dataColor = produk.getProduct_color_eng().split(",");
+        if (produk.getProduct_color_eng() != null){
+            String[] dataColor = produk.getProduct_color_eng().split(",");
 
-        for (int i = 0 ; i < dataColor.length; i++){
+            for (int i = 0; i < dataColor.length; i++) {
 
-            customColorList.add(new CustomItemSpinner(dataColor[i], R.drawable.ic_checklist));
+                customColorList.add(new CustomItemSpinner(dataColor[i], R.drawable.ic_checklist));
+            }
+        } else {
+            tvSelectColor.setVisibility(View.GONE);
+            colorSpinner.setVisibility(View.GONE);
         }
+
 
         return customColorList;
     }
@@ -213,6 +223,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

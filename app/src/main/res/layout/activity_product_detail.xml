@@ -108,6 +108,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/tv_select_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Select Size"
@@ -124,6 +125,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
+                    android:id="@+id/tv_select_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Select Color"
