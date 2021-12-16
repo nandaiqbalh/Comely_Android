@@ -1,24 +1,28 @@
 package com.nandaiqbalh.comely.activity.product;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.Gson;
 import com.nandaiqbalh.comely.R;
-import com.nandaiqbalh.comely.helper.SharedPrefs;
 import com.nandaiqbalh.comely.model.brand.Brand;
+import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
 import com.nandaiqbalh.comely.model.produk.Produk;
+import com.nandaiqbalh.comely.rest.ApiConfig;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -47,9 +51,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         // get info produk
         getInformasiProduk();
 
+        // get all brand
+        getAllBrand();
     }
 
-    private void inisialisasi(){
+    private void inisialisasi() {
         ivGambarProduk = (ImageView) findViewById(R.id.iv_gambar_produk);
         tvNamaProduk = (TextView) findViewById(R.id.tv_nama_produk_detail);
         tvHargaProduk = (TextView) findViewById(R.id.tv_harga_produk_detail);
@@ -59,26 +65,24 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
     }
 
-    private void getInformasiProduk(){
+    private void getInformasiProduk() {
 
         String dataProduk = getIntent().getStringExtra("extra"); // ambil value dari intent
         produk = gson.fromJson(dataProduk, Produk.class); // cast dari bentuk String ke bentuk Object Produk
 
-
-
         // set value
-        if (produk != null){
+        if (produk != null) {
             tvNamaProduk.setText(produk.getProduct_name_eng());
             tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
             tvDeskripsiProduk.setText(produk.getShort_desc_eng());
             tvKodeProduk.setText(produk.getProduct_code());
 
-            tvBrand.setText("Unregistered Brand.");
 
             // Gambar
-            String imageURL =  "http://192.168.160.130/udemy/latihan_ecommerce/public/" + produk.getProduct_thumbnail();
+            String imageURL = "http://192.168.160.130/udemy/latihan_ecommerce/public/" + produk.getProduct_thumbnail();
             Picasso.get()
                     .load(imageURL)
                     .placeholder(R.drawable.iv_logo)
@@ -92,6 +96,25 @@ public class ProductDetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    private ArrayList<Brand> brandArrayList = new ArrayList<>();
+    private void getAllBrand(){
+        Call<BrandResponse> brandResponseCall = ApiConfig.getService().brandAll();
+        brandResponseCall.enqueue(new Callback<BrandResponse>() {
+            @Override
+            public void onResponse(Call<BrandResponse> call, Response<BrandResponse> response) {
+                BrandResponse respon = response.body();
+                if (respon.getSuccess() == 1){
+                    brandArrayList = respon.getBrand();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BrandResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

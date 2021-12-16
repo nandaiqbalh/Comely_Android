@@ -18,6 +18,8 @@ import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.activity.LoginActivity;
 import com.nandaiqbalh.comely.adapter.ProdukAdapter;
+import com.nandaiqbalh.comely.model.brand.Brand;
+import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
 import com.nandaiqbalh.comely.model.produk.Produk;
 import com.nandaiqbalh.comely.model.produk.network.ProductResponse;
 import com.nandaiqbalh.comely.model.userlogin.LoginResponse;

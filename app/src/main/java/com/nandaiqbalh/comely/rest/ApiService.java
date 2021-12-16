@@ -1,5 +1,7 @@
 package com.nandaiqbalh.comely.rest;
 
+import com.nandaiqbalh.comely.model.brand.Brand;
+import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
 import com.nandaiqbalh.comely.model.produk.network.ProductResponse;
 import com.nandaiqbalh.comely.model.register.RegisterRequest;
 import com.nandaiqbalh.comely.model.register.RegisterResponse;
@@ -31,5 +33,9 @@ public interface ApiService {
 
     @GET("product/get-all")
     Call<ProductResponse> productAll();
+
+    // brand
+    @GET("brand/get-all")
+    Call<BrandResponse> brandAll();
 
 }
