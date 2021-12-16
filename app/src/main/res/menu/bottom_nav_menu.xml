@@ -9,7 +9,7 @@
     <item
         android:id="@+id/nav_keranjang"
         android:icon="@drawable/icon_keranjang"
-        android:title="My Chart"
+        android:title="My Cart"
 
         android:visible="true" />
 
