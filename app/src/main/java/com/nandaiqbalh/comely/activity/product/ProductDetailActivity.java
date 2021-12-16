@@ -29,6 +29,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
     ImageView ivGambarProduk;
     TextView tvNamaProduk, tvHargaProduk, tvBrand, tvKodeProduk, tvDeskripsiProduk;
     TextView tvSelectSize, tvSelectColor;
+    TextView tvDiskonProduk;
 
     Spinner sizeSpinner;
     ArrayList<CustomItemSpinner> customSizeList;
@@ -76,6 +77,8 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
         tvKodeProduk = (TextView) findViewById(R.id.tv_code_detail);
         tvDeskripsiProduk = (TextView) findViewById(R.id.tv_deskripsi_detail);
 
+        tvDiskonProduk = (TextView) findViewById(R.id.tv_diskon_produk_detail);
+
         tvSelectSize = (TextView) findViewById(R.id.tv_select_size);
         tvSelectColor = (TextView) findViewById(R.id.tv_select_color);
 
@@ -99,6 +102,33 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
             tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
             tvDeskripsiProduk.setText(produk.getShort_desc_eng());
             tvKodeProduk.setText(produk.getProduct_code());
+
+            // diskon amount
+            if (produk.getDiscount_prize().equalsIgnoreCase("0")) {
+                tvDiskonProduk.setVisibility(View.GONE);
+            } else {
+                double diskonPrize, sellingPrize, diskonFinal;
+
+                try {
+                    diskonPrize = Double.parseDouble(produk.getDiscount_prize());
+                } catch (NumberFormatException e) {
+                    diskonPrize = 0;
+                }
+
+                try {
+                    sellingPrize = Double.parseDouble(produk.getSelling_prize());
+                } catch (NumberFormatException e) {
+                    sellingPrize = 0;
+                }
+
+
+                diskonFinal = diskonPrize / sellingPrize * 100;
+                int angkaSignifikan = 1;
+                double tempDiskon = Math.pow(10, angkaSignifikan);
+                double diskonTampil = (double) Math.round(diskonFinal*tempDiskon)/tempDiskon;
+
+                tvDiskonProduk.setText(diskonTampil + "%");
+            }
 
             // brand name (unsuccess)
             tvBrand.setText("Unregistered Brand");
