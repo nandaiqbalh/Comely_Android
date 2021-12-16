@@ -39,7 +39,8 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
     ArrayList<CustomItemSpinner> customSizeList;
     int width = 200;
 
-
+    Spinner colorSpinner;
+    ArrayList<CustomItemSpinner> customColorList;
 
     // intent getExtra
     Gson gson = new Gson();
@@ -67,6 +68,9 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 //        getAllBrand();
 
         customSizeSpinner();
+
+        customColorSpinner();
+
     }
 
     private void inisialisasi() {
@@ -79,6 +83,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 
         // Spinner
         sizeSpinner = (Spinner) findViewById(R.id.spinner_size);
+        colorSpinner = (Spinner) findViewById(R.id.spinner_color);
 
         // toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -163,6 +168,31 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
         return customSizeList;
     }
 
+    private void customColorSpinner(){
+
+        customColorList = getCustomColorList();
+
+        CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this, customColorList);
+        if (colorSpinner != null) {
+            colorSpinner.setAdapter(customSpinnerAdapter);
+            colorSpinner.setOnItemSelectedListener(this);
+        }
+    }
+
+    private ArrayList<CustomItemSpinner> getCustomColorList() {
+
+        customColorList = new ArrayList<>();
+
+        String[] dataColor = produk.getProduct_color_eng().split(",");
+
+        for (int i = 0 ; i < dataColor.length; i++){
+
+            customColorList.add(new CustomItemSpinner(dataColor[i], R.drawable.ic_checklist));
+        }
+
+        return customColorList;
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -174,6 +204,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
 
         }
         sizeSpinner.setDropDownWidth(width);
+        colorSpinner.setDropDownWidth(width);
 
         CustomItemSpinner item = (CustomItemSpinner) adapterView.getSelectedItem();
     }
