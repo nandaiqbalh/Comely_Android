@@ -2,6 +2,7 @@ package com.nandaiqbalh.comely.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,10 +51,14 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.namaProduk.setText(dataHolder.get(position).getProduct_name_eng());
-        holder.hargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(dataHolder.get(position).getSelling_prize())));
 
         if (dataHolder.get(position).getDiscount_prize().equalsIgnoreCase("0")) {
             holder.diskonProduk.setVisibility(View.GONE);
+
+            // harga dicoret
+            holder.hargaAwal.setVisibility(View.GONE);
+            holder.hargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(dataHolder.get(position).getSelling_prize())));
+
         } else {
             double diskonPrize, sellingPrize, diskonFinal;
 
@@ -76,7 +81,17 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
             double diskonTampil = (double) Math.round(diskonFinal*tempDiskon)/tempDiskon;
 
             holder.diskonProduk.setText(diskonTampil + "%");
+
+            // harga dicoret
+            holder.hargaAwal.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(dataHolder.get(position).getSelling_prize())));
+            holder.hargaAwal.setPaintFlags(holder.hargaAwal.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            double hargaTampil = sellingPrize - diskonPrize;
+            // harga setelah diskon yang tampil
+            holder.hargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Double.valueOf(hargaTampil)));
+
         }
+
 
         // Gambar
         String imageURL = "http://192.168.160.130/udemy/latihan_ecommerce/public/" + dataHolder.get(position).getProduct_thumbnail();
@@ -110,6 +125,8 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
         ImageView gambarProduk;
         TextView namaProduk, hargaProduk;
         TextView diskonProduk;
+        TextView hargaAwal;
+
         CardView layoutProduct;
 
         public myViewHolder(@NonNull View itemView) {
@@ -118,6 +135,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.myViewHold
             namaProduk = itemView.findViewById(R.id.tv_nama_produk);
             hargaProduk = itemView.findViewById(R.id.tv_harga_produk);
             diskonProduk = itemView.findViewById(R.id.tv_diskon_produk);
+            hargaAwal = itemView.findViewById(R.id.tv_harga_awal);
 
             // layout card view
             layoutProduct = itemView.findViewById(R.id.cv_layout_product);
