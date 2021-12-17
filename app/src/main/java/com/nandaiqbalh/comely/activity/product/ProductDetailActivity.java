@@ -1,5 +1,6 @@
 package com.nandaiqbalh.comely.activity.product;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,6 +31,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
     TextView tvNamaProduk, tvHargaProduk, tvBrand, tvKodeProduk, tvDeskripsiProduk;
     TextView tvSelectSize, tvSelectColor;
     TextView tvDiskonProduk;
+    TextView tvHargaAwalDetail;
 
     Spinner sizeSpinner;
     ArrayList<CustomItemSpinner> customSizeList;
@@ -78,6 +80,7 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
         tvDeskripsiProduk = (TextView) findViewById(R.id.tv_deskripsi_detail);
 
         tvDiskonProduk = (TextView) findViewById(R.id.tv_diskon_produk_detail);
+        tvHargaAwalDetail = (TextView) findViewById(R.id.tv_harga_awal_detail);
 
         tvSelectSize = (TextView) findViewById(R.id.tv_select_size);
         tvSelectColor = (TextView) findViewById(R.id.tv_select_color);
@@ -106,6 +109,11 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
             // diskon amount
             if (produk.getDiscount_prize().equalsIgnoreCase("0")) {
                 tvDiskonProduk.setVisibility(View.GONE);
+
+                // harga dicoret
+                tvHargaAwalDetail.setVisibility(View.GONE);
+                tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
+
             } else {
                 double diskonPrize, sellingPrize, diskonFinal;
 
@@ -128,6 +136,15 @@ public class ProductDetailActivity extends AppCompatActivity implements AdapterV
                 double diskonTampil = (double) Math.round(diskonFinal*tempDiskon)/tempDiskon;
 
                 tvDiskonProduk.setText(diskonTampil + "%");
+
+                // harga dicoret
+                tvHargaAwalDetail.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Integer.valueOf(produk.getSelling_prize())));
+                tvHargaAwalDetail.setPaintFlags(tvHargaAwalDetail.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+                double hargaTampil = sellingPrize - diskonPrize;
+                // harga setelah diskon yang tampil
+                tvHargaProduk.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(Double.valueOf(hargaTampil)));
+
             }
 
             // brand name (unsuccess)
