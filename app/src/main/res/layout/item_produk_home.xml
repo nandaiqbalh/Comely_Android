@@ -60,7 +60,7 @@
             android:layout_marginLeft="5dp"
             android:text="Rp0000"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/neutral_grey"
+            android:textColor="@color/primary_red"
             android:textSize="10sp"
             />
 

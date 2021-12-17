@@ -16,7 +16,8 @@
         android:theme="@style/Theme.Comely"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.product.ProductDetailActivity"></activity>
+        <activity android:name=".activity.product.bycategory.CategoryHome"></activity>
+        <activity android:name=".activity.product.ProductDetailActivity" />
         <activity android:name=".activity.userprofile.ChangeProfileActivity" />
         <activity android:name=".activity.userprofile.ProfileActivity" />
         <activity android:name=".activity.LoginActivity" />

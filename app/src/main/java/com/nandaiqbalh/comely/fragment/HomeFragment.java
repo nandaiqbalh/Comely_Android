@@ -12,11 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nandaiqbalh.comely.MainActivity;
 import com.nandaiqbalh.comely.R;
 import com.nandaiqbalh.comely.activity.LoginActivity;
+import com.nandaiqbalh.comely.activity.product.bycategory.CategoryHome;
+import com.nandaiqbalh.comely.activity.userprofile.ProfileActivity;
 import com.nandaiqbalh.comely.adapter.ProdukAdapter;
 import com.nandaiqbalh.comely.model.brand.Brand;
 import com.nandaiqbalh.comely.model.brand.network.BrandResponse;
@@ -89,6 +92,8 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerViewFeatured, recyclerViewHotDeals, rvAllProduct;
     ArrayList<Produk> dataHolder;
 
+    TextView tvMoreCategory;
+
     @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +113,9 @@ public class HomeFragment extends Fragment {
         getProductHotDeals();
         // get all product
         getAllProduct();
+
+        // main button
+        mainButton();
 
 
 
@@ -159,6 +167,20 @@ public class HomeFragment extends Fragment {
 
         // produk recycler view
         rvAllProduct = view.findViewById(R.id.rv_all_product);
+
+        tvMoreCategory = view.findViewById(R.id.tv_more_category);
+
+    }
+
+    private void mainButton(){
+
+        tvMoreCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CategoryHome.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
